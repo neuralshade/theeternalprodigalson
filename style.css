@@ -73,23 +73,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Overlay de textura de grão de papel sutil e manchas de impressão */
-.paper-texture-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 999;
-  opacity: 0.45;
-  background-image: 
-    radial-gradient(var(--ink-secondary) 0.5px, transparent 0.5px),
-    radial-gradient(var(--ink-muted) 0.5px, transparent 0.5px);
-  background-size: 24px 24px, 48px 48px;
-  background-position: 0 0, 12px 12px;
-  mix-blend-mode: multiply;
-}
+
 
 /* --------------------------------------------------------------------------
    Scrollbars Invisíveis (Rolagem mantida sem poluição visual)
@@ -1084,8 +1068,10 @@ body {
 
   .sidebar-mobile-close-bar {
     display: flex !important;
-    justify-content: flex-end;
-    margin-bottom: -0.5rem;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100%;
+    margin-bottom: 0.2rem;
   }
 
   .sidebar-close-btn {
@@ -1095,9 +1081,10 @@ body {
     font-size: 0.72rem;
     font-weight: 700;
     color: var(--accent-crimson);
-    padding: 0.3rem 0.65rem;
+    padding: 0.35rem 0.95rem;
     cursor: pointer;
     transition: var(--transition-smooth);
+    letter-spacing: 0.04em;
   }
 
   .sidebar-close-btn:hover {
@@ -1357,18 +1344,6 @@ body {
   transform: translateY(0) scale(1);
 }
 
-/* Moldura interna clássica do cartão */
-.author-dossier-card::before {
-  content: "";
-  position: absolute;
-  top: 10px;
-  bottom: 10px;
-  left: 10px;
-  right: 10px;
-  border: 1px solid var(--border-vintage);
-  pointer-events: none;
-}
-
 .dossier-top-bar {
   display: flex;
   justify-content: space-between;
@@ -1503,10 +1478,10 @@ body {
 
 .dossier-statement p {
   font-family: var(--font-body);
-  font-size: 1.08rem;
-  line-height: 1.8;
+  font-size: 1.05rem;
+  line-height: 1.75;
   color: var(--ink-secondary);
-  text-align: justify;
+  text-align: left;
   margin-bottom: 0.9rem;
 }
 
