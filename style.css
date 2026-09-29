@@ -1,0 +1,1369 @@
+/* ==========================================================================
+   O ETERNO FILHO PRÓDIGO — ARQUIVO PESSOAL DE TEXTOS & ENSAIOS
+   Estética: Vintage Editorial, Máquina de Escrever, Livro Antigo, Manuscrito
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Variáveis de Design & Tokens
+   -------------------------------------------------------------------------- */
+:root {
+  /* Paleta de Cores: Papel Antigo & Tinta Ferrogálica */
+  --bg-parchment-light: #fbf7ee;
+  --bg-parchment-base: #f4edd9;
+  --bg-parchment-deep: #ebe0c7;
+  --bg-parchment-dark: #dfd2b5;
+  --bg-page-sheet: #fdfbf7;
+
+  --ink-primary: #1e1b18;       /* Tinta preta envelhecida / carvão profundo */
+  --ink-secondary: #4a423a;     /* Tinta sépia média */
+  --ink-muted: #786d61;         /* Tinta desbotada */
+  --ink-faint: #a39786;         /* Marca d'água / linhas suaves */
+
+  --accent-crimson: #84231e;     /* Vermelho lacre / carimbo editorial */
+  --accent-crimson-hover: #9c2b26;
+  --accent-crimson-faint: rgba(132, 35, 30, 0.08);
+
+  --border-vintage: #cbbea1;
+  --border-vintage-dark: #ad9e7e;
+  --border-double: 3px double #bdae8e;
+
+  /* Tipografia */
+  --font-body: "EB Garamond", "Georgia", "Garamond", serif;
+  --font-editorial: "Playfair Display", "Times New Roman", serif;
+  --font-inscriptional: "Cinzel", "Trajan Pro", serif;
+  --font-typewriter: "Courier Prime", "Courier New", monospace;
+
+  /* Escala de Leitura */
+  --base-font-size: 1.1875rem; /* ~19px para excelente legibilidade literária */
+  --reading-line-height: 1.85;
+  --reading-max-width: 72ch;
+
+  /* Transições sutis */
+  --transition-smooth: all 0.25s ease-in-out;
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset & Estrutura Base
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%;
+  scroll-behavior: smooth;
+  background-color: var(--bg-parchment-base);
+  color: var(--ink-primary);
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--base-font-size);
+  line-height: var(--reading-line-height);
+  background: radial-gradient(ellipse at center, var(--bg-parchment-light) 0%, var(--bg-parchment-base) 60%, var(--bg-parchment-deep) 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: var(--ink-primary);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Overlay de textura de grão de papel sutil e manchas de impressão */
+.paper-texture-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.45;
+  background-image: 
+    radial-gradient(var(--ink-secondary) 0.5px, transparent 0.5px),
+    radial-gradient(var(--ink-muted) 0.5px, transparent 0.5px);
+  background-size: 24px 24px, 48px 48px;
+  background-position: 0 0, 12px 12px;
+  mix-blend-mode: multiply;
+}
+
+/* --------------------------------------------------------------------------
+   Scrollbars Invisíveis (Rolagem mantida sem poluição visual)
+   -------------------------------------------------------------------------- */
+/* Firefox e padrão W3C */
+* {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+/* Chrome, Edge, Safari, Opera e derivados */
+::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none !important;
+  width: 0px !important;
+  height: 0px !important;
+  background: transparent !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. Cabeçalho Mobile (Menu Recolhível)
+   -------------------------------------------------------------------------- */
+.mobile-header {
+  display: none;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--bg-parchment-light);
+  border-bottom: 2px solid var(--border-vintage-dark);
+  padding: 0.75rem 1.25rem;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(30, 27, 24, 0.08);
+}
+
+.menu-toggle-btn {
+  background: var(--bg-parchment-deep);
+  border: 1px solid var(--border-vintage-dark);
+  color: var(--ink-primary);
+  font-family: var(--font-typewriter);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.5rem 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.menu-toggle-btn:hover {
+  background: var(--accent-crimson);
+  color: #fff;
+  border-color: var(--accent-crimson);
+}
+
+.typewriter-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.mobile-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.archive-stamp-mini {
+  font-family: var(--font-typewriter);
+  font-size: 0.65rem;
+  font-weight: 700;
+  background-color: var(--accent-crimson);
+  color: #fff;
+  padding: 0.15rem 0.4rem;
+  border-radius: 1px;
+}
+
+.mobile-title {
+  font-family: var(--font-inscriptional);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--ink-primary);
+}
+
+/* --------------------------------------------------------------------------
+   4. Layout Principal (Grid Sidebar + Área de Leitura)
+   -------------------------------------------------------------------------- */
+.archive-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 1680px;
+  margin: 0 auto;
+  position: relative;
+  background-color: transparent;
+}
+
+/* --------------------------------------------------------------------------
+   5. BARRA LATERAL (Sidebar / Catálogo do Arquivo)
+   -------------------------------------------------------------------------- */
+.sidebar-archive {
+  width: 320px;
+  min-width: 300px;
+  max-width: 360px;
+  background-color: var(--bg-parchment-base);
+  border-right: 2px solid var(--border-vintage-dark);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  max-height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 80;
+  box-shadow: 4px 0 15px rgba(40, 32, 24, 0.04);
+}
+
+.sidebar-inner {
+  padding: 2.2rem 1.6rem 3rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  min-height: 100%;
+}
+
+/* Masthead / Topo do Arquivo */
+.archive-masthead {
+  text-align: center;
+  padding-bottom: 0.5rem;
+}
+
+/* Gravura de Abertura / Rembrandt */
+.masthead-engraving {
+  margin-bottom: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.engraving-frame {
+  width: 140px;
+  height: 140px;
+  border: 1px solid var(--border-vintage-dark);
+  padding: 4px;
+  background-color: var(--bg-parchment-light);
+  box-shadow: 
+    0 2px 8px rgba(30, 27, 24, 0.08),
+    0 0 0 1px var(--border-vintage) inset;
+  position: relative;
+}
+
+.engraving-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  filter: sepia(0.2) contrast(1.05);
+  display: block;
+  border: 1px solid var(--border-vintage);
+}
+
+.engraving-caption {
+  display: block;
+  font-family: var(--font-typewriter);
+  font-size: 0.62rem;
+  font-style: italic;
+  color: var(--ink-muted);
+  margin-top: 0.35rem;
+  letter-spacing: 0.04em;
+}
+
+.masthead-badge {
+  font-family: var(--font-typewriter);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--accent-crimson);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.archive-main-title {
+  font-family: var(--font-inscriptional);
+  font-size: 1.45rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  line-height: 1.25;
+  color: var(--ink-primary);
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+}
+
+.archive-subtitle {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--ink-secondary);
+  line-height: 1.4;
+}
+
+.vintage-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.85rem;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background-color: var(--border-vintage-dark);
+}
+
+.divider-symbol {
+  color: var(--accent-crimson);
+  font-size: 0.9rem;
+}
+
+/* Campo de Busca Vintage / Ficha Catalográfica */
+.archive-search-box {
+  background: var(--bg-parchment-light);
+  border: 1px solid var(--border-vintage-dark);
+  padding: 0.75rem;
+  position: relative;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.search-label {
+  display: block;
+  font-family: var(--font-typewriter);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--ink-muted);
+  margin-bottom: 0.35rem;
+}
+
+.search-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.search-prefix {
+  font-family: var(--font-typewriter);
+  font-size: 0.95rem;
+  line-height: 1;
+  color: var(--accent-crimson);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  transform: translateY(-1px);
+}
+
+#searchInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  font-family: var(--font-typewriter);
+  font-size: 0.85rem;
+  line-height: 1.2;
+  color: var(--ink-primary);
+  outline: none;
+  padding: 0.15rem 0;
+  vertical-align: middle;
+}
+
+#searchInput::placeholder {
+  color: var(--ink-faint);
+  font-style: italic;
+}
+
+.clear-search-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--ink-muted);
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 0.25rem;
+}
+.clear-search-btn:hover {
+  color: var(--accent-crimson);
+}
+
+/* Filtros de Categoria (Tags tipo carimbo) */
+.category-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.cat-filter-btn {
+  background: transparent;
+  border: 1px solid var(--border-vintage);
+  color: var(--ink-secondary);
+  font-family: var(--font-typewriter);
+  font-size: 0.7rem;
+  padding: 0.25rem 0.55rem;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: var(--transition-smooth);
+}
+
+.cat-filter-btn:hover {
+  border-color: var(--ink-primary);
+  color: var(--ink-primary);
+  background: var(--bg-parchment-light);
+}
+
+.cat-filter-btn.active {
+  background: var(--ink-primary);
+  color: var(--bg-parchment-light);
+  border-color: var(--ink-primary);
+  font-weight: 700;
+}
+
+/* Lista do Catálogo / Índice */
+.catalog-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.catalog-header-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 2px solid var(--ink-primary);
+  padding-bottom: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.catalog-header-title {
+  font-family: var(--font-inscriptional);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--ink-primary);
+}
+
+.catalog-count {
+  font-family: var(--font-typewriter);
+  font-size: 0.68rem;
+  color: var(--accent-crimson);
+  font-weight: 700;
+}
+
+.manuscript-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.manuscript-item {
+  position: relative;
+}
+
+.manuscript-link {
+  display: block;
+  text-decoration: none;
+  color: var(--ink-secondary);
+  padding: 0.65rem 0.8rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-left: 3px solid transparent;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+}
+
+.manuscript-link:hover {
+  background-color: var(--bg-parchment-light);
+  border-color: var(--border-vintage);
+  border-left-color: var(--border-vintage-dark);
+  color: var(--ink-primary);
+}
+
+.manuscript-item.active .manuscript-link {
+  background-color: var(--bg-page-sheet);
+  border: 1px solid var(--border-vintage-dark);
+  border-left: 4px solid var(--accent-crimson);
+  color: var(--ink-primary);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.item-top-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+
+.item-number {
+  font-family: var(--font-typewriter);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent-crimson);
+  letter-spacing: 0.05em;
+}
+
+.manuscript-item.active .item-number {
+  color: var(--accent-crimson);
+}
+
+.item-title {
+  font-family: var(--font-editorial);
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: inherit;
+}
+
+.item-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-typewriter);
+  font-size: 0.68rem;
+  color: var(--ink-muted);
+  margin-left: 1.6rem;
+}
+
+.item-bullet {
+  color: var(--border-vintage-dark);
+}
+
+/* Colofão da Barra Lateral */
+.sidebar-colophon {
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  padding-bottom: 4rem;
+  border-top: 1px solid var(--border-vintage);
+  text-align: center;
+}
+
+.colophon-seal-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.6rem;
+  padding: 0.35rem 0.75rem;
+  transition: var(--transition-smooth);
+  border-radius: 2px;
+}
+
+.colophon-seal-btn:hover .seal-inner {
+  background-color: var(--accent-crimson);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(132, 35, 30, 0.25);
+}
+
+.colophon-seal-btn:hover .seal-caption {
+  color: var(--ink-primary);
+  text-decoration: underline;
+}
+
+.seal-caption {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--ink-secondary);
+  transition: var(--transition-smooth);
+}
+
+.seal-inner {
+  font-family: var(--font-inscriptional);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--accent-crimson);
+  border: 1px solid var(--accent-crimson);
+  padding: 0.2rem 0.6rem;
+  transition: var(--transition-smooth);
+}
+
+.colophon-meta {
+  font-family: var(--font-typewriter);
+  font-size: 0.65rem;
+  color: var(--ink-muted);
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   6. ÁREA CENTRAL DE LEITURA (Reading Chamber)
+   -------------------------------------------------------------------------- */
+.reading-chamber {
+  flex: 1;
+  padding: 2.5rem 3.5rem 5rem 3.5rem;
+  overflow-y: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  outline: none;
+}
+
+/* Barra superior de classificação arquivística & ferramentas */
+.document-top-meta-bar {
+  width: 100%;
+  max-width: var(--reading-max-width);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-vintage-dark);
+  padding-bottom: 0.6rem;
+  margin-bottom: 2rem;
+  font-family: var(--font-typewriter);
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+}
+
+.doc-classification {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: var(--ink-secondary);
+}
+
+.doc-icon {
+  color: var(--accent-crimson);
+  font-size: 0.95rem;
+}
+
+.reading-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tool-btn {
+  background: var(--bg-parchment-light);
+  border: 1px solid var(--border-vintage);
+  color: var(--ink-secondary);
+  font-family: var(--font-typewriter);
+  font-size: 0.72rem;
+  padding: 0.25rem 0.55rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.tool-btn:hover {
+  background: var(--ink-primary);
+  color: #fff;
+  border-color: var(--ink-primary);
+}
+
+/* Folha de Manuscrito (Página Central) */
+.manuscript-page {
+  width: 100%;
+  max-width: var(--reading-max-width);
+  background-color: var(--bg-page-sheet);
+  border: 1px solid var(--border-vintage-dark);
+  border-radius: 1px;
+  padding: 4rem 4.5rem 4.5rem 4.5rem;
+  box-shadow: 
+    0 1px 3px rgba(30, 27, 24, 0.05),
+    0 10px 30px rgba(30, 27, 24, 0.07),
+    0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+  position: relative;
+  transition: opacity 0.25s ease-out;
+}
+
+/* Efeito de borda dupla clássica nos cantos */
+.manuscript-page::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 1px solid var(--border-vintage);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* Cabeçalho do Artigo */
+.article-header {
+  text-align: center;
+  margin-bottom: 2.8rem;
+  position: relative;
+  z-index: 2;
+}
+
+.article-header-pre {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-family: var(--font-typewriter);
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  color: var(--accent-crimson);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.9rem;
+}
+
+.article-category-badge {
+  border: 1px solid var(--accent-crimson);
+  padding: 0.15rem 0.5rem;
+  font-size: 0.7rem;
+  background: var(--accent-crimson-faint);
+}
+
+.article-title {
+  font-family: var(--font-editorial);
+  font-size: 2.55rem;
+  font-weight: 700;
+  line-height: 1.18;
+  color: var(--ink-primary);
+  letter-spacing: -0.015em;
+  margin-bottom: 0.8rem;
+}
+
+.article-subtitle-text {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.25rem;
+  line-height: 1.45;
+  color: var(--ink-secondary);
+  margin-bottom: 1.2rem;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.article-meta-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-family: var(--font-typewriter);
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  margin-top: 1.2rem;
+}
+
+.meta-label {
+  font-weight: 700;
+  color: var(--ink-secondary);
+  margin-right: 0.25rem;
+}
+
+.meta-item-separator {
+  color: var(--border-vintage-dark);
+}
+
+/* Divisores Ornamentais */
+.ornament-break {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  margin: 2rem 0;
+}
+
+.ornament-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-vintage-dark), transparent);
+}
+
+.ornament-glyph {
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  color: var(--accent-crimson);
+  font-family: var(--font-inscriptional);
+}
+
+/* --------------------------------------------------------------------------
+   7. CORPO DO TEXTO (Tipografia Literária & Legibilidade)
+   -------------------------------------------------------------------------- */
+.article-body {
+  font-family: var(--font-body);
+  font-size: var(--base-font-size);
+  color: var(--ink-primary);
+  line-height: var(--reading-line-height);
+  position: relative;
+  z-index: 2;
+}
+
+/* Parágrafos e Espaçamento */
+.article-body p {
+  margin-bottom: 1.65rem;
+  text-align: justify;
+  hyphens: auto;
+  word-break: normal;
+}
+
+/* Letra Capitular (Drop Cap) no primeiro parágrafo */
+.article-body > p:first-of-type::first-letter,
+.article-body .has-dropcap::first-letter {
+  font-family: var(--font-editorial);
+  font-size: 4.2rem;
+  line-height: 0.85;
+  float: left;
+  margin-top: 0.2rem;
+  margin-right: 0.65rem;
+  margin-bottom: -0.1rem;
+  color: var(--accent-crimson);
+  font-weight: 700;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.08);
+}
+
+/* Subtítulos dentro do texto */
+.article-body h3 {
+  font-family: var(--font-editorial);
+  font-size: 1.55rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--ink-primary);
+  margin: 2.8rem 0 1.2rem 0;
+  border-bottom: 1px solid var(--border-vintage);
+  padding-bottom: 0.4rem;
+}
+
+.article-body h4 {
+  font-family: var(--font-inscriptional);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--ink-secondary);
+  margin: 2rem 0 0.8rem 0;
+  text-transform: uppercase;
+}
+
+/* Citações / Blockquotes */
+.article-body blockquote {
+  margin: 2.2rem 0;
+  padding: 1.2rem 1.6rem 1.2rem 2rem;
+  background-color: var(--bg-parchment-light);
+  border-left: 4px solid var(--accent-crimson);
+  border-top: 1px solid var(--border-vintage);
+  border-bottom: 1px solid var(--border-vintage);
+  border-right: 1px solid var(--border-vintage);
+  font-style: italic;
+  font-size: 1.12em;
+  line-height: 1.7;
+  color: var(--ink-secondary);
+  position: relative;
+}
+
+.article-body blockquote cite {
+  display: block;
+  margin-top: 0.75rem;
+  font-family: var(--font-typewriter);
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  color: var(--accent-crimson);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Listas estilizadas */
+.article-body ul, .article-body ol {
+  margin: 1.5rem 0 1.8rem 2.2rem;
+}
+
+.article-body li {
+  margin-bottom: 0.65rem;
+  line-height: 1.75;
+}
+
+/* Ênfases e links */
+.article-body em {
+  font-style: italic;
+}
+
+.article-body strong {
+  font-weight: 700;
+  color: var(--ink-primary);
+}
+
+.article-body hr.section-divider {
+  border: none;
+  text-align: center;
+  margin: 2.5rem 0;
+}
+
+.article-body hr.section-divider::after {
+  content: "⁂";
+  font-size: 1.3rem;
+  color: var(--accent-crimson);
+  letter-spacing: 0.5em;
+}
+
+/* Notas de Rodapé / Margem */
+.footnote-block {
+  margin-top: 3.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed var(--border-vintage-dark);
+  font-size: 0.92rem;
+  color: var(--ink-muted);
+  line-height: 1.6;
+}
+
+.footnote-title {
+  font-family: var(--font-typewriter);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--ink-secondary);
+  margin-bottom: 0.6rem;
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   8. RODAPÉ DO ARTIGO & NAVEGAÇÃO
+   -------------------------------------------------------------------------- */
+.article-footer {
+  margin-top: 3.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.footer-break {
+  margin-bottom: 2rem;
+}
+
+.footer-signoff {
+  text-align: center;
+  margin-bottom: 2.8rem;
+}
+
+.signoff-stamp {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  border: 2px solid var(--accent-crimson);
+  padding: 0.5rem 1.4rem;
+  margin-bottom: 0;
+  transform: rotate(-1deg);
+  background: var(--bg-parchment-light);
+  box-shadow: 2px 2px 0px rgba(132, 35, 30, 0.15);
+}
+
+.stamp-border {
+  font-family: var(--font-inscriptional);
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: var(--accent-crimson);
+}
+
+.stamp-date {
+  font-family: var(--font-typewriter);
+  font-size: 0.65rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.1em;
+}
+
+/* Paginação (Anterior / Próximo) */
+.article-pagination {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  border-top: 1px solid var(--border-vintage-dark);
+  padding-top: 1.8rem;
+}
+
+.page-nav-btn {
+  background: var(--bg-parchment-base);
+  border: 1px solid var(--border-vintage-dark);
+  padding: 1rem 1.2rem;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  transition: var(--transition-smooth);
+}
+
+.page-nav-btn.next-btn {
+  text-align: right;
+}
+
+.page-nav-btn:hover:not(:disabled) {
+  background: var(--bg-parchment-light);
+  border-color: var(--ink-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.page-nav-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  border-color: var(--border-vintage);
+}
+
+.nav-dir {
+  font-family: var(--font-typewriter);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--accent-crimson);
+  text-transform: uppercase;
+}
+
+.nav-title {
+  font-family: var(--font-editorial);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.reading-bottom-note {
+  margin-top: 3rem;
+  text-align: center;
+  font-family: var(--font-typewriter);
+  font-size: 0.72rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.05em;
+}
+
+/* --------------------------------------------------------------------------
+   9. RESPONSIVIDADE & DISPOSITIVOS MÓVEIS
+   -------------------------------------------------------------------------- */
+@media (max-width: 980px) {
+  .mobile-header {
+    display: flex;
+  }
+
+  .archive-container {
+    flex-direction: column;
+  }
+
+  .sidebar-archive {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 320px;
+    max-width: 85vw;
+    height: 100vh;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 200;
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.25);
+  }
+
+  .sidebar-archive.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(20, 18, 15, 0.6);
+    backdrop-filter: blur(2px);
+    z-index: 150;
+  }
+
+  .sidebar-backdrop.active {
+    display: block;
+  }
+
+  .reading-chamber {
+    padding: 1.5rem 1rem 3.5rem 1rem;
+    width: 100%;
+  }
+
+  .manuscript-page {
+    padding: 2.2rem 1.6rem;
+  }
+
+  .article-title {
+    font-size: 1.95rem;
+  }
+
+  .article-pagination {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .page-nav-btn.next-btn {
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --base-font-size: 1.1rem;
+  }
+
+  .manuscript-page {
+    padding: 1.8rem 1.2rem;
+  }
+
+  .article-title {
+    font-size: 1.65rem;
+  }
+
+  .article-meta-row {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .meta-item-separator {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   10. MODAL / FICHA ARQUIVÍSTICA DO AUTOR (DOSSIÊ EX LIBRIS)
+   -------------------------------------------------------------------------- */
+.author-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(22, 18, 14, 0.78);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.author-modal-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.author-dossier-card {
+  width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--bg-page-sheet);
+  border: 2px solid var(--border-vintage-dark);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45), inset 0 0 60px rgba(180, 150, 110, 0.12);
+  position: relative;
+  transform: translateY(20px) scale(0.97);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 2.2rem 2.8rem;
+}
+
+.author-modal-backdrop.active .author-dossier-card {
+  transform: translateY(0) scale(1);
+}
+
+/* Moldura interna clássica do cartão */
+.author-dossier-card::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  border: 1px solid var(--border-vintage);
+  pointer-events: none;
+}
+
+.dossier-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-vintage-dark);
+  padding-bottom: 0.6rem;
+  margin-bottom: 1.8rem;
+  font-family: var(--font-typewriter);
+  font-size: 0.7rem;
+  color: var(--ink-muted);
+}
+
+.dossier-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--accent-crimson);
+}
+
+.dossier-close-btn {
+  background: transparent;
+  border: 1px solid var(--border-vintage);
+  color: var(--ink-secondary);
+  font-family: var(--font-typewriter);
+  font-size: 0.7rem;
+  padding: 0.2rem 0.55rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.dossier-close-btn:hover {
+  background: var(--accent-crimson);
+  color: #fff;
+  border-color: var(--accent-crimson);
+}
+
+.dossier-masthead {
+  text-align: center;
+  margin-bottom: 1.6rem;
+}
+
+.dossier-seal-badge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid var(--accent-crimson);
+  padding: 0.25rem 0.8rem;
+  margin-bottom: 0.8rem;
+  background: var(--bg-parchment-light);
+}
+
+.dossier-seal-badge .seal-text {
+  font-family: var(--font-inscriptional);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--accent-crimson);
+}
+
+.dossier-seal-badge .seal-sub {
+  font-family: var(--font-typewriter);
+  font-size: 0.58rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.08em;
+}
+
+.dossier-title {
+  font-family: var(--font-inscriptional);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--ink-primary);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.3rem;
+}
+
+.dossier-epithet {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--ink-muted);
+}
+
+.dossier-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem 1.2rem;
+  background: var(--bg-parchment-light);
+  border: 1px solid var(--border-vintage);
+  padding: 1.1rem 1.4rem;
+  margin-bottom: 1.8rem;
+}
+
+.dossier-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.dossier-field .field-label {
+  font-family: var(--font-typewriter);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--accent-crimson);
+  letter-spacing: 0.08em;
+}
+
+.dossier-field .field-value {
+  font-family: var(--font-typewriter);
+  font-size: 0.82rem;
+  color: var(--ink-primary);
+  line-height: 1.4;
+}
+
+.dossier-break {
+  margin: 1.6rem 0;
+}
+
+.dossier-statement {
+  margin-bottom: 0.5rem;
+}
+
+.statement-heading {
+  font-family: var(--font-editorial);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink-primary);
+  margin-bottom: 0.8rem;
+  text-align: center;
+}
+
+.dossier-statement p {
+  font-family: var(--font-body);
+  font-size: 1.08rem;
+  line-height: 1.8;
+  color: var(--ink-secondary);
+  text-align: justify;
+  margin-bottom: 0.9rem;
+}
+
+.dossier-statement p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 680px) {
+  .author-dossier-card {
+    padding: 1.8rem 1.4rem;
+  }
+  .dossier-meta-grid {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+  .dossier-title {
+    font-size: 1.45rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   11. ESTILOS DE IMPRESSÃO (Folha Limpa / PDF)
+   -------------------------------------------------------------------------- */
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .paper-texture-overlay,
+  .mobile-header,
+  .sidebar-archive,
+  .document-top-meta-bar,
+  .article-pagination,
+  .reading-bottom-note {
+    display: none !important;
+  }
+
+  .archive-container {
+    display: block;
+  }
+
+  .reading-chamber {
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .manuscript-page {
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    max-width: 100%;
+    background: transparent;
+  }
+
+  .manuscript-page::before {
+    display: none;
+  }
+
+  .article-title {
+    color: #000;
+  }
+}

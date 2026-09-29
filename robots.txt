@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap do Arquivo Pessoal
+Sitemap: sitemap.xml

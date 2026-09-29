@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O Eterno Filho Pródigo — Arquivo Pessoal de Textos & Ensaios</title>
+  <meta name="description" content="Arquivo pessoal de ensaios, reflexões filosóficas, ontologia, crítica social e aforismos sobre a condição humana.">
+  <meta name="keywords" content="filosofia, ensaios, reflexões morais, discernimento, crítica social, ontologia, o eterno filho pródigo, literatura, aforismos">
+  <meta name="author" content="Jairo Holanda da Silva">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Redes Sociais & Compartilhamento (WhatsApp, Twitter, LinkedIn) -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="O Eterno Filho Pródigo — Arquivo Pessoal de Textos & Ensaios">
+  <meta property="og:description" content="Manuscritos, ensaios e anotações filosóficas preservadas.">
+  <meta property="og:image" content="assets/prodigal-son.jpg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="O Eterno Filho Pródigo — Arquivo Pessoal">
+  <meta name="twitter:description" content="Ensaios, reflexões e memórias preservadas sob estética editorial antiga.">
+  <meta name="twitter:image" content="assets/prodigal-son.jpg">
+
+  <!-- Schema.org / Dados Estruturados para o Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "O Eterno Filho Pródigo",
+    "description": "Arquivo pessoal de textos, ensaios, reflexões e fragmentos literários e filosóficos.",
+    "inLanguage": "pt-BR",
+    "author": {
+      "@type": "Person",
+      "name": "Jairo Holanda da Silva"
+    }
+  }
+  </script>
+
+  <!-- Google Fonts: EB Garamond (literary body), Cinzel & Playfair Display (editorial titles), Courier Prime (typewriter accents) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Paper grain & atmospheric overlay -->
+  <div class="paper-texture-overlay" aria-hidden="true"></div>
+
+  <!-- Mobile Top Bar with Drawer Toggle -->
+  <header class="mobile-header" id="mobileHeader">
+    <button class="menu-toggle-btn" id="menuToggleBtn" aria-label="Abrir catálogo do arquivo" aria-expanded="false">
+      <span class="typewriter-icon">☰</span>
+      <span class="menu-btn-label">Índice do Arquivo</span>
+    </button>
+    <div class="mobile-brand">
+      <span class="archive-stamp-mini">DOCS</span>
+      <span class="mobile-title">O Eterno Filho Pródigo</span>
+    </div>
+  </header>
+
+  <!-- Main Archive Frame Wrapper -->
+  <div class="archive-container">
+    
+    <!-- 1. LEFT SIDEBAR (Catalog & Index) -->
+    <aside class="sidebar-archive" id="sidebarArchive">
+      <div class="sidebar-inner">
+        
+        <!-- Archive Header Stamp -->
+        <div class="archive-masthead">
+          <div class="masthead-engraving">
+            <div class="engraving-frame">
+              <img src="assets/prodigal-son.jpg" alt="O Retorno do Filho Pródigo — Rembrandt (1642)" class="engraving-img">
+            </div>
+            <span class="engraving-caption">Rembrandt van Rijn, 1642</span>
+          </div>
+
+          <h1 class="archive-main-title">O Eterno Filho Pródigo</h1>
+          <p class="archive-subtitle">Ensaios, Memórias & Fragmentos</p>
+          <div class="vintage-divider">
+            <span class="divider-line"></span>
+            <span class="divider-symbol">❦</span>
+            <span class="divider-line"></span>
+          </div>
+        </div>
+
+        <!-- Search & Quick Filter -->
+        <div class="archive-search-box">
+          <label for="searchInput" class="search-label">BUSCAR NO ACERVO</label>
+          <div class="search-input-wrapper">
+            <span class="search-prefix">§</span>
+            <input type="text" id="searchInput" placeholder="Digite uma palavra ou tema..." autocomplete="off">
+            <button id="clearSearchBtn" class="clear-search-btn" title="Limpar busca" style="display: none;">×</button>
+          </div>
+        </div>
+
+        <!-- Category Tags Filter -->
+        <div class="category-filters" id="categoryFilters">
+          <!-- Populated dynamically via JS -->
+        </div>
+
+        <!-- Catalog Items List -->
+        <nav class="catalog-nav" aria-label="Lista de Textos do Arquivo">
+          <div class="catalog-header-line">
+            <span class="catalog-header-title">ÍNDICE DE MANUSCRITOS</span>
+            <span class="catalog-count" id="catalogCount">06 TEXTOS</span>
+          </div>
+          <ul class="manuscript-list" id="manuscriptList">
+            <!-- Populated dynamically via JS -->
+          </ul>
+        </nav>
+
+        <!-- Sidebar Colophon / Footer -->
+        <div class="sidebar-colophon">
+          <button type="button" class="colophon-seal-btn" id="authorModalTriggerSeal" aria-label="Abrir Ficha do Autor (Ex Libris)">
+            <span class="seal-inner">❖ EX LIBRIS ❖</span>
+            <span class="seal-caption">Sobre o Autor</span>
+          </button>
+          <p class="colophon-meta">
+            Preservado sob curadoria pessoal.<br>
+            Edição do Acervo • <span id="currentYear">2026</span>
+          </p>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- Overlay backdrop for mobile when drawer is open -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <!-- 2. MAIN READING CHAMBER -->
+    <main class="reading-chamber" id="readingChamber" tabindex="-1">
+      
+      <!-- Top Archival Header Strip -->
+      <div class="document-top-meta-bar">
+        <div class="doc-classification">
+          <span class="doc-icon">¶</span>
+          <span id="docCatalogRef">DOC. REG. Nº 001-A</span>
+        </div>
+        <div class="reading-tools">
+          <button id="fontSizeDecBtn" class="tool-btn" title="Diminuir fonte (A-)">A-</button>
+          <button id="fontSizeIncBtn" class="tool-btn" title="Aumentar fonte (A+)">A+</button>
+          <button id="printBtn" class="tool-btn" title="Imprimir / Salvar em PDF">
+            <span class="tool-icon">⎙</span> Imprimir
+          </button>
+        </div>
+      </div>
+
+      <!-- Book Page Manuscript Canvas -->
+      <article class="manuscript-page" id="manuscriptPage">
+        
+        <!-- Header of the Selected Article -->
+        <header class="article-header">
+          <div class="article-header-pre">
+            <span class="article-doc-number" id="articleDocNumber">MANUSCRITO Nº 01</span>
+            <span class="article-bullet">•</span>
+            <span class="article-category-badge" id="articleCategoryBadge">Reflexões</span>
+          </div>
+
+          <h2 class="article-title" id="articleTitle">Título do Texto</h2>
+          <p class="article-subtitle-text" id="articleSubtitle" style="display: none;"></p>
+
+          <div class="article-meta-row">
+            <div class="meta-item">
+              <span class="meta-label">DATA:</span>
+              <time class="meta-value" id="articleDate">22 de setembro de 2026</time>
+            </div>
+            <div class="meta-item-separator">/</div>
+            <div class="meta-item">
+              <span class="meta-label">LEITURA:</span>
+              <span class="meta-value" id="articleReadTime">5 min</span>
+            </div>
+            <div class="meta-item-separator">/</div>
+            <div class="meta-item">
+              <span class="meta-label">ARQUIVO:</span>
+              <span class="meta-value" id="articleFolder">Gabinete Principal</span>
+            </div>
+          </div>
+
+          <!-- Editorial Decorative Divider -->
+          <div class="ornament-break">
+            <div class="ornament-line"></div>
+            <div class="ornament-glyph">❖ &nbsp; ❖ &nbsp; ❖</div>
+            <div class="ornament-line"></div>
+          </div>
+        </header>
+
+        <!-- Article Content Body -->
+        <div class="article-body" id="articleBody">
+          <!-- Populated dynamically via JS -->
+        </div>
+
+        <!-- Article Footer / Stamp of Completion -->
+        <footer class="article-footer">
+          <div class="ornament-break footer-break">
+            <div class="ornament-line"></div>
+            <div class="ornament-glyph">― § ―</div>
+            <div class="ornament-line"></div>
+          </div>
+
+          <div class="footer-signoff">
+            <div class="signoff-stamp">
+              <span class="stamp-border">ARQUIVO CONCLUÍDO</span>
+              <span class="stamp-date" id="footerStampDate">REGISTRADO EM 2026</span>
+            </div>
+          </div>
+
+          <!-- Article Navigation (Prev / Next) -->
+          <nav class="article-pagination" aria-label="Navegação entre textos">
+            <button id="prevArticleBtn" class="page-nav-btn prev-btn">
+              <span class="nav-dir">← Texto Anterior</span>
+              <span class="nav-title" id="prevArticleTitle">...</span>
+            </button>
+            <button id="nextArticleBtn" class="page-nav-btn next-btn">
+              <span class="nav-dir">Próximo Texto →</span>
+              <span class="nav-title" id="nextArticleTitle">...</span>
+            </button>
+          </nav>
+        </footer>
+
+      </article>
+
+      <!-- Archive Bottom Colophon Note -->
+      <div class="reading-bottom-note">
+        <p>O Eterno Filho Pródigo • Acervo Pessoal de Textos e Artigos • Manuscritos Estáticos</p>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Modal / Ficha Arquivística do Autor (Dossiê Ex Libris) -->
+  <div class="author-modal-backdrop" id="authorModalBackdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="authorModalTitle">
+    <div class="author-dossier-card" id="authorDossierCard">
+      
+      <!-- Barra Superior da Ficha -->
+      <div class="dossier-top-bar">
+        <div class="dossier-tag">
+          <span class="dossier-icon">❖</span>
+          <span>ARQUIVO PESSOAL • REGISTRO DE AUTORIA</span>
+        </div>
+        <button type="button" class="dossier-close-btn" id="closeAuthorModalBtn" aria-label="Fechar ficha do autor">
+          <span>FECHAR [ × ]</span>
+        </button>
+      </div>
+
+      <!-- Conteúdo Interno da Ficha -->
+      <div class="dossier-body">
+        
+        <!-- Cabeçalho & Selo -->
+        <div class="dossier-masthead">
+          <div class="dossier-seal-badge">
+            <span class="seal-text">❖ EX LIBRIS ❖</span>
+            <span class="seal-sub">REGISTRO CURATORIAL</span>
+          </div>
+          <h2 class="dossier-title" id="authorModalTitle">O Eterno Filho Pródigo</h2>
+          <p class="dossier-epithet">Acervo Pessoal de Textos, Ensaios & Fragmentos Filosóficos</p>
+        </div>
+
+        <!-- Grade de Metadados Arquivísticos -->
+        <div class="dossier-meta-grid">
+          <div class="dossier-field">
+            <span class="field-label">AUTORIA:</span>
+            <span class="field-value">Jairo Holanda da Silva</span>
+          </div>
+          <div class="dossier-field">
+            <span class="field-label">GÊNERO:</span>
+            <span class="field-value">Filosofia, Ontologia, Crítica Social & Aforismos</span>
+          </div>
+          <div class="dossier-field">
+            <span class="field-label">NATUREZA:</span>
+            <span class="field-value">Textos e reflexões autorais originais</span>
+          </div>
+          <div class="dossier-field">
+            <span class="field-label">EDIÇÃO:</span>
+            <span class="field-value">Preservação Estática Definitiva</span>
+          </div>
+        </div>
+
+        <div class="ornament-break dossier-break">
+          <div class="ornament-line"></div>
+          <div class="ornament-glyph">❖</div>
+          <div class="ornament-line"></div>
+        </div>
+
+        <!-- Manifesto / Nota Biográfica do Autor -->
+        <div class="dossier-statement">
+          <h3 class="statement-heading">Sobre o Autor & o Acervo</h3>
+          <p>
+            Este acervo reúne pensamentos, reflexões e ensaios escritos a partir da observação sincera da vida, do discernimento moral e da condição humana. Longe das promessas fáceis e do ruído efêmero do mundo, cada manuscrito preservado aqui busca examinar a realidade com sobriedade, rigor íntimo e honestidade intelectual.
+          </p>
+          <p>
+            As palavras aqui reunidas são um convite à reflexão profunda, ao questionamento dos equilíbrios sociais e ao reencontro do indivíduo consigo mesmo.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
