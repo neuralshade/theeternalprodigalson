@@ -216,6 +216,10 @@ body {
   min-height: 100%;
 }
 
+.sidebar-mobile-close-bar {
+  display: none;
+}
+
 /* Masthead / Topo do Arquivo */
 .archive-masthead {
   text-align: center;
@@ -1026,6 +1030,7 @@ body {
 @media (max-width: 980px) {
   .mobile-header {
     display: flex;
+    padding: 0.65rem 1rem;
   }
 
   .archive-container {
@@ -1037,12 +1042,12 @@ body {
     top: 0;
     left: 0;
     width: 320px;
-    max-width: 85vw;
+    max-width: 88vw;
     height: 100vh;
     transform: translateX(-100%);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 200;
-    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.25);
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.3);
   }
 
   .sidebar-archive.open {
@@ -1056,8 +1061,8 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(20, 18, 15, 0.6);
-    backdrop-filter: blur(2px);
+    background: rgba(20, 18, 15, 0.65);
+    backdrop-filter: blur(3px);
     z-index: 150;
   }
 
@@ -1065,17 +1070,40 @@ body {
     display: block;
   }
 
+  .sidebar-mobile-close-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: -0.5rem;
+  }
+
+  .sidebar-close-btn {
+    background: var(--bg-parchment-deep);
+    border: 1px solid var(--border-vintage-dark);
+    font-family: var(--font-typewriter);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--accent-crimson);
+    padding: 0.3rem 0.65rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+  }
+
+  .sidebar-close-btn:hover {
+    background: var(--accent-crimson);
+    color: #fff;
+  }
+
   .reading-chamber {
-    padding: 1.5rem 1rem 3.5rem 1rem;
+    padding: 1rem 0.8rem 3.5rem 0.8rem;
     width: 100%;
   }
 
   .manuscript-page {
-    padding: 2.2rem 1.6rem;
+    padding: 2rem 1.6rem;
   }
 
   .article-title {
-    font-size: 1.95rem;
+    font-size: 2.1rem;
   }
 
   .article-pagination {
@@ -1088,26 +1116,187 @@ body {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   :root {
-    --base-font-size: 1.1rem;
+    --base-font-size: 1.0625rem;
+  }
+
+  .mobile-header {
+    padding: 0.55rem 0.75rem;
+  }
+
+  .menu-toggle-btn {
+    padding: 0.38rem 0.65rem;
+    font-size: 0.76rem;
+  }
+
+  .mobile-brand {
+    gap: 0.35rem;
+  }
+
+  .archive-stamp-mini {
+    font-size: 0.58rem;
+    padding: 0.1rem 0.3rem;
+  }
+
+  .mobile-title {
+    font-size: 0.88rem;
+    letter-spacing: 0.02em;
+  }
+
+  .reading-chamber {
+    padding: 0.6rem 0.4rem 2.8rem 0.4rem;
+  }
+
+  .document-top-meta-bar {
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.45rem;
+    font-size: 0.7rem;
+  }
+
+  .print-label {
+    display: none;
   }
 
   .manuscript-page {
-    padding: 1.8rem 1.2rem;
+    padding: 1.5rem 1.05rem;
+    border-radius: 1px;
+  }
+
+  .manuscript-page::before {
+    top: 5px;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+  }
+
+  .article-header {
+    margin-bottom: 1.4rem;
+  }
+
+  .article-doc-number {
+    font-size: 0.72rem;
   }
 
   .article-title {
-    font-size: 1.65rem;
+    font-size: 1.55rem;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+    word-break: break-word;
+  }
+
+  .article-subtitle-text {
+    font-size: 1rem;
+    line-height: 1.45;
+    max-width: 100%;
+    margin-bottom: 0.85rem;
   }
 
   .article-meta-row {
-    flex-direction: column;
-    gap: 0.25rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3rem 0.5rem;
+    font-size: 0.7rem;
+    margin-top: 0.6rem;
+    line-height: 1.4;
   }
 
   .meta-item-separator {
-    display: none;
+    display: inline-block;
+    color: var(--border-vintage-dark);
+  }
+
+  .ornament-break {
+    margin: 1.3rem 0;
+    gap: 0.8rem;
+  }
+
+  /* Letra capitular harmoniosa no celular sem criar vácuo */
+  .article-body > p:first-of-type::first-letter,
+  .article-body .has-dropcap::first-letter {
+    font-size: 2.85rem;
+    line-height: 0.82;
+    margin-top: 0.05rem;
+    margin-right: 0.32rem;
+    margin-bottom: -0.05rem;
+  }
+
+  .article-body p {
+    margin-bottom: 1.3rem;
+    line-height: 1.75;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  .article-body blockquote {
+    margin: 1.5rem 0;
+    padding: 0.9rem 1.1rem;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .article-body h3 {
+    font-size: 1.3rem;
+    margin: 2rem 0 0.8rem 0;
+  }
+
+  .footer-signoff {
+    margin-bottom: 1.8rem;
+  }
+
+  .signoff-stamp {
+    padding: 0.4rem 1rem;
+  }
+
+  .stamp-border {
+    font-size: 0.75rem;
+  }
+
+  .stamp-date {
+    font-size: 0.6rem;
+  }
+
+  .article-pagination {
+    padding-top: 1.2rem;
+    gap: 0.65rem;
+  }
+
+  .page-nav-btn {
+    padding: 0.75rem 0.9rem;
+  }
+
+  .nav-dir {
+    font-size: 0.65rem;
+  }
+
+  .nav-title {
+    font-size: 0.88rem;
+  }
+
+  .reading-bottom-note {
+    font-size: 0.65rem;
+    padding-top: 1.8rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .manuscript-page {
+    padding: 1.3rem 0.85rem;
+  }
+
+  .article-title {
+    font-size: 1.4rem;
+  }
+
+  .doc-classification {
+    font-size: 0.65rem;
+  }
+
+  .tool-btn {
+    padding: 0.18rem 0.4rem;
+    font-size: 0.65rem;
   }
 }
 

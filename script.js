@@ -290,6 +290,7 @@ const DOM = {
   sidebar: document.getElementById("sidebarArchive"),
   sidebarBackdrop: document.getElementById("sidebarBackdrop"),
   menuToggleBtn: document.getElementById("menuToggleBtn"),
+  sidebarCloseBtn: document.getElementById("sidebarCloseBtn"),
   manuscriptList: document.getElementById("manuscriptList"),
   categoryFilters: document.getElementById("categoryFilters"),
   catalogCount: document.getElementById("catalogCount"),
@@ -595,9 +596,13 @@ function bindEventListeners() {
     });
   }
 
-  // Backdrop click para fechar menu no mobile
+  // Backdrop e botão fechar menu no mobile
   if (DOM.sidebarBackdrop) {
     DOM.sidebarBackdrop.addEventListener("click", closeSidebar);
+  }
+
+  if (DOM.sidebarCloseBtn) {
+    DOM.sidebarCloseBtn.addEventListener("click", closeSidebar);
   }
 
   // Modal do Autor (Abertura no Ex Libris e Fechamento)
